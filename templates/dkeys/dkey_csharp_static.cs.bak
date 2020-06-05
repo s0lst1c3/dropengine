@@ -1,0 +1,9 @@
+public class {{ special['class_name'] }}
+{
+    public static byte[] {{ func_name }}()
+    {
+        byte[] dkey = {{ special['ekey_data']['val_array'] }};
+
+        return dkey;
+    }
+}

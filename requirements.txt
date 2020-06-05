@@ -1,0 +1,5 @@
+pycryptodome
+pkcs7
+jinja2
+termcolor
+Flask

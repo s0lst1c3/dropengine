@@ -1,0 +1,43 @@
+/*
+public class Decryptor
+{
+    public static byte[] Decrypt(byte[] ct, byte[] ekey, byte[] iv)
+    {
+        SHA256Managed hashstring = new SHA256Managed();
+        byte[] hashed_key = hashstring.ComputeHash(ekey);
+
+            using (RijndaelManaged rijAlg = new RijndaelManaged())
+            {
+                rijAlg.Key = hashed_key;
+                rijAlg.IV = iv;
+                rijAlg.Padding = PaddingMode.PKCS7;
+                rijAlg.BlockSize = 128;
+                rijAlg.Mode = CipherMode.CBC;
+                ICryptoTransform decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+
+                return decryptor.TransformFinalBlock(ct, 0, ct.Length);
+            }
+    }
+}
+*/
+public class {{ special['class_name'] }}
+{
+    public static byte[] {{ func_name }}(byte[] ct, byte[] ekey)
+    {
+        byte [] iv = {{ special['crypter_data']['iv_array'] }};
+        SHA256Managed hashstring = new SHA256Managed();
+        byte[] hashed_key = hashstring.ComputeHash(ekey);
+
+            using (RijndaelManaged rijAlg = new RijndaelManaged())
+            {
+                rijAlg.Key = hashed_key;
+                rijAlg.IV = iv;
+                rijAlg.Padding = PaddingMode.PKCS7;
+                rijAlg.BlockSize = 128;
+                rijAlg.Mode = CipherMode.CBC;
+                ICryptoTransform decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+
+                return decryptor.TransformFinalBlock(ct, 0, ct.Length);
+            }
+    }
+}
