@@ -1,3 +1,5 @@
+# based on: https://github.com/byt3bl33d3r/SILENTTRINITY/blob/master/silenttrinity/core/teamserver/loader.py
+
 import logging
 import os
 
