@@ -1,7 +1,7 @@
 # dropengine
 Malleable payload generation framework.
 
-By @s0lst1c3
+By [@s0lst1c3](https://twitter.com/s0lst1c3)
 
 # Install
 
