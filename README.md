@@ -1,11 +1,25 @@
 # dropengine
+Malleable payload generation framework.
 
+By @s0lst1c3
 
 # Install
 
-# Getting Started
+Clone the git repo:
+```
+git clone https://github.com/s0lst1c3/dropengine.git
+```
 
+Create a new virtual env:
+```
+python3.7 -m venv venv 
+```
 
+Activate the virtual env:
+
+```
+source venv/bin/activate
+```
 
 # Constructing a Basic Payload
 
