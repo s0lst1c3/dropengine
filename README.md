@@ -243,28 +243,28 @@ To run DropEngine with these selections, use the following command (note that th
 
 This tool either builds upon, is inspired by, or directly incorporates prior research and development from the following awesome people:
 
-Applocker Bypasses
-[@subtee](https://twitter.com/subtee)
+**Applocker Bypasses**
+- [@subtee](https://twitter.com/subtee)
 
-Enivoronmental Keying
+**Enivoronmental Keying**
 - Travis Morrow (Ebowla)
 - [secretsquirrel](https://github.com/secretsquirrel) (Ebowla)
 - [Antonio24](https://github.com/antonio24) (Spotter)
 - [matterpreter](https://github.com/matterpreter) (Spotter)
 - [dmchell](https://github.com/dmchell)
 
-Remote Keying
+**Remote Keying**
 - [leoloobeek](https://github.com/leoloobeek) 
 
-Payload Obfuscation
+**Payload Obfuscation**
 - [@subtee](https://twitter.com/subtee)
 - [Chris Truncer](https://twitter.com/christruncer) (Veil)
 - [Harmj0y](https://github.com/harmj0y)
 
-Dynamic Imports and Modular Design Patterns
+**Dynamic Imports and Modular Design Patterns**
 - [byt3bl33d3r](https://github.com/byt3bl33d3r) (SilentTrinity, CrackMapExec, and MITMf)
 
-Sandbox Evasion
+**Sandbox Evasion**
 - [arvanaghi](https://github.com/arvanaghi) (CheckPlease)
 - [Chris Truncer](https://twitter.com/christruncer) (CheckPlease)
 
