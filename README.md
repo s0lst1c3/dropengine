@@ -2,6 +2,13 @@
 
 By [@s0lst1c3](https://twitter.com/s0lst1c3)
 
+
+# Disclaimer
+
+DropEngine (the "Software") and associated documentation is provided “AS IS”. The Developer makes no other warranties, express or implied, and hereby disclaims all implied warranties, including any warranty of merchantability and warranty of fitness for a particular purpose. Any actions or activities related to the use of the Software are the sole responsibility of the end user. The Developer will not be held responsible in the event that any criminal charges are brought against any individuals using or misusing the Software. It is up to the end user to use the Software in an authorized manner and to ensure that their use complies with all applicable laws and regulations.
+
+
+
 # Install
 
 Clone the git repo:
@@ -231,4 +238,33 @@ To run DropEngine with these selections, use the following command (note that th
 --shellcode shell.bin \
 --o example.csproj
 ```
+
+# Acknowledgements
+
+This tool either builds upon, is inspired by, or directly incorporates prior research and development from the following awesome people:
+
+Applocker Bypasses
+[@subtee](https://twitter.com/subtee)
+
+Enivoronmental Keying
+- Travis Morrow (Ebowla)
+- [secretsquirrel](https://github.com/secretsquirrel) (Ebowla)
+- [Antonio24](https://github.com/antonio24) (Spotter)
+- [matterpreter](https://github.com/matterpreter) (Spotter)
+- [dmchell](https://github.com/dmchell)
+
+Remote Keying
+- [leoloobeek](https://github.com/leoloobeek) 
+
+Payload Obfuscation
+- [@subtee](https://twitter.com/subtee)
+- [Chris Truncer](https://twitter.com/christruncer) (Veil)
+- [Harmj0y](https://github.com/harmj0y)
+
+Dynamic Imports and Modular Design Patterns
+- [byt3bl33d3r](https://github.com/byt3bl33d3r) (SilentTrinity, CrackMapExec, and MITMf)
+
+Sandbox Evasion
+- [arvanaghi](https://github.com/arvanaghi) (CheckPlease)
+- [Chris Truncer](https://twitter.com/christruncer) (CheckPlease)
 
