@@ -1,7 +1,5 @@
 ![DropEngine](https://raw.githubusercontent.com/s0lst1c3/dropengine/master/DropEngine%201.png)
 
-Malleable payload generation framework.
-
 By [@s0lst1c3](https://twitter.com/s0lst1c3)
 
 # Install
