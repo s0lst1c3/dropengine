@@ -30,6 +30,8 @@ This tool either builds upon, is inspired by, or directly incorporates nearly te
 * [byt3bl33d3r](https://github.com/byt3bl33d3r)
 * [arvanaghi](https://github.com/arvanaghi)
 
+This list will likely grow as additional functionality is added to the project.
+
 For a complete description of what each of these people has contributed to the current payload development landscape and this tool, please see:
 
 * [https://github.com/s0lst1c3/dropengine/wiki/Acknowledgements](https://github.com/s0lst1c3/dropengine/wiki/Acknowledgements)
