@@ -167,6 +167,44 @@ class Dispatcher:
 
         self.runners = self.runner_loader.get_loadables()
         self.all_modules += self.runners
+
+    def list_compatible(self, mod):
+
+        print()
+        print('For module:', mod)
+            
+
+        if hasattr(mod, 'compatible_omodules'):
+            print()
+            print('    Listing compatible output modules:')
+            print()
+            for omodule in mod.compatible_omodules:
+                print('        ', omodule)
+                print()
+        if hasattr(mod, 'compatible_imodules'):
+            print()
+            print('    Listing compatible input modules:')
+            print()
+            for imodule in mod.compatible_imodules:
+                print('        ', imodule)
+                print()
+        if hasattr(mod, 'compatible_interfaces'):
+            print()
+            print('    Listing compatible interfaces:')
+            print()
+            for omodule in mod.compatible_interfaces:
+                print('        ', omodule)
+                print()
+
+        print()
+
+    def list_compatible_interfaces(self, mods):
+
+        print()
+        for mod in mods:
+            if self.master_args.interface in mod.compatible_interfaces:
+                print('        ', mod)
+        print()
     
 
     def parse_args(self):
@@ -189,73 +227,177 @@ class Dispatcher:
 
             sys.exit()
 
+    
 
         if self.master_args.list is not None:
-            print()
 
-            list_all = self.master_args.list == [] or 'all' in self.master_args.list
+            if self.master_args.compatible:
 
-            if list_all or 'ekeys' in self.master_args.list:
-                print('Listing ekeys:')
+                if self.master_args.interface is not None:
+                    print()
+
+                    print('For interface:', self.master_args.interface)
+                    print()
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'executors' in self.master_args.list:
+
+                        print('    Listing list executors:')
+                        self.list_compatible_interfaces(self.executors)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'crypters' in self.master_args.list:
+                        print('    Listing list crypters:')
+                        self.list_compatible_interfaces(self.crypters)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'decrypters' in self.master_args.list:
+                        print('    Listing list decrypters:')
+                        self.list_compatible_interfaces(self.decrypters)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'runners' in self.master_args.list:
+                        print('    Listing list runners:')
+                        self.list_compatible_interfaces(self.runners)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'postmodules' in self.master_args.list:
+                        print('    Listing list premodules:')
+                        self.list_compatible_interfaces(self.premodules)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'premodules' in self.master_args.list:
+                        print('    Listing list postmodules:')
+                        self.list_compatible_interfaces(self.postmodules)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'ekeys' in self.master_args.list:
+                        print('    Listing list ekeys:')
+                        self.list_compatible_interfaces(self.ekeys)
+
+                    if self.master_args.list == [] or 'all' in self.master_args.list or 'dkeys' in self.master_args.list:
+                        print('    Listing list dkeys:')
+                        self.list_compatible_interfaces(self.dkeys)
+
+
+
+                    #self.dispatch['interface'] = self.interfaces[self.master_args.interface]
+
+
+
+                if self.master_args.executor is not None:
+
+                    mod = self.executors[self.master_args.executor]
+                    self.list_compatible(mod)
+            
+                if self.master_args.crypter is not None:
+
+                    mod = self.crypters[self.master_args.crypter]
+                    self.list_compatible(mod)
+
+
+                if self.master_args.decrypter is not None:
+                    mod = self.decrypters[self.master_args.decrypter]
+                    self.list_compatible(mod)
+
+
+                if self.master_args.runner is not None:
+                    mod = self.runners[self.master_args.runner]
+                    self.list_compatible(mod)
+
+
+                if self.master_args.premodules != []: 
+
+                    for pre in self.master_args.premodules:
+                        mod = self.premodules[pre]
+                        self.list_compatible(mod)
+
+                if self.master_args.postmodules != []: 
+
+                    for post in self.master_args.postmodules:
+                        mod = self.postmodules[post]
+                        self.list_compatible(mod)
+
+                if self.master_args.ekeys != []:
+
+                    for ekey in self.master_args.ekeys:
+                        mod = self.ekeys[ekey]
+                        self.list_compatible(mod)
+
+                if self.master_args.dkeys != []:
+
+                    for dkey in self.master_args.dkeys:
+                        mod = self.dkeys[dkey]
+                        self.list_compatible(mod)
+
+                sys.exit()
+
+            else:
                 print()
-                for _ in self.ekeys:
-                    print(f'    {_}')
-                print()
-            if list_all or 'dkeys' in self.master_args.list:
-                print('Listing dkeys:')
-                print()
-                for _ in self.dkeys:
-                    print(f'    {_}')
-                print()
-            if list_all or 'executors' in self.master_args.list:
-                print('Listing executors:')
-                print()
-                for _ in self.executors:
-                    print(f'    {_}')
-                print()
-            if list_all or 'crypters' in self.master_args.list:
-                print('Listing crypters:')
-                print()
-                for _ in self.crypters:
-                    print(f'    {_}')
-                print()
-            if list_all or 'decrypters' in self.master_args.list:
-                print('Listing decrypters:')
-                print()
-                for _ in self.decrypters:
-                    print(f'    {_}')
-                print()
-            if list_all or 'mutators' in self.master_args.list:
-                print('Listing mutators:')
-                print()
-                for _ in self.mutators:
-                    print(f'    {_}')
-                print()
-            if list_all or 'runners' in self.master_args.list:
-                print('Listing runners:')
-                print()
-                for _ in self.runners:
-                    print(f'    {_}')
-                print()
-            if list_all or 'interfaces' in self.master_args.list:
-                print('Listing interfaces:')
-                print()
-                for _ in self.interfaces:
-                    print(f'    {_}')
-                print()
-            if list_all or 'premodules' in self.master_args.list:
-                print('Listing premodles:')
-                print()
-                for _ in self.premodules:
-                    print(f'    {_}')
-                print()
-            if list_all or 'postmodules' in self.master_args.list:
-                print('Listing postmodules:')
-                print()
-                for _ in self.postmodules:
-                    print(f'    {_}')
-                print()
-            sys.exit()
+
+                list_all = self.master_args.list == [] or 'all' in self.master_args.list
+
+                if list_all or 'interfaces' in self.master_args.list:
+                    print('Listing interfaces:')
+                    print()
+                    for _ in self.interfaces:
+                        print(f'    {_}')
+                    print()
+
+                if list_all or 'ekeys' in self.master_args.list:
+                    print('Listing ekeys:')
+                    print()
+                    for _ in self.ekeys:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'dkeys' in self.master_args.list:
+                    print('Listing dkeys:')
+                    print()
+                    for _ in self.dkeys:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'executors' in self.master_args.list:
+                    print('Listing executors:')
+                    print()
+                    for _ in self.executors:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'crypters' in self.master_args.list:
+                    print('Listing crypters:')
+                    print()
+                    for _ in self.crypters:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'decrypters' in self.master_args.list:
+                    print('Listing decrypters:')
+                    print()
+                    for _ in self.decrypters:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'mutators' in self.master_args.list:
+                    print('Listing mutators:')
+                    print()
+                    for _ in self.mutators:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'runners' in self.master_args.list:
+                    print('Listing runners:')
+                    print()
+                    for _ in self.runners:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'interfaces' in self.master_args.list:
+                    print('Listing interfaces:')
+                    print()
+                    for _ in self.interfaces:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'premodules' in self.master_args.list:
+                    print('Listing premodles:')
+                    print()
+                    for _ in self.premodules:
+                        print(f'    {_}')
+                    print()
+                if list_all or 'postmodules' in self.master_args.list:
+                    print('Listing postmodules:')
+                    print()
+                    for _ in self.postmodules:
+                        print(f'    {_}')
+                    print()
+                sys.exit()
 
         elif self.at_least_one_module_type_is_selected(self.master_args):
 
@@ -300,12 +442,6 @@ class Dispatcher:
                 self.dispatch['mutator'] = self.mutators[self.master_args.mutator]
                 unknown = self.mutators[self.master_args.mutator].parse_args(unknown)
                 self.options['mutator'] = self.mutators[self.master_args.mutator].get_options()
-            else:
-
-                print('[*] No mutator selected. Defauting to mutator_null.')
-                self.dispatch['mutator'] = self.mutators['mutator_null']
-                unknown = self.mutators['mutator_null'].parse_args(unknown)
-                self.options['mutator'] = self.mutators['mutator_null'].get_options()
 
             if self.master_args.runner is not None:
 
@@ -505,6 +641,11 @@ class Dispatcher:
                                 'runners',
                             ],
                             help='List modules')
+
+        modes_group.add_argument('--compatible', 
+                            dest='compatible',
+                            action='store_true',
+                            help='List compatible modules')
 
         modes_group.add_argument('--build', 
                             dest='build',
