@@ -16,8 +16,11 @@ class Crypter(InputModule):
 
     def validate(self):
 
-        if not hasattr(self, 'compatible_decrypters'):
-            raise Exception('Crypter modules requires attribute: self.compatible_decrypter')
+        if not hasattr(self, 'compatible_omodules'):
+            raise Exception('Crypter modules requires attribute: self.compatible_omodules')
+
+        if not hasattr(self, 'compatible_interfaces'):
+            raise Exception('Crypter modules requires attribute: self.compatible_interfaces')
 
         if not hasattr(self, 'encrypt'):
             raise Exception('Crypter modules requires method: self.encrypt')
