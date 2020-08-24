@@ -16,6 +16,18 @@ DropEngine (the "Software") and associated documentation is provided “AS IS”
 
 All documentation is available on the project's Wiki, which can be found here: https://github.com/s0lst1c3/dropengine/wiki
 
+# Contributing
+
+Contributions are encouraged and more than welcome. Guidelines for creating pull requests and reporting issues can be found in  [CONTRIBUTING.md](CONTRIBUTING.md).
+
+# Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see  [https://github.com/s0lst1c3/dropengine/tags](https://github.com/s0lst1c3/dropengine/tags).
+
+# License
+
+This project is licensed under the GNU Public License 3.0 - see the [LICENSE.md](LICENSE.md) file for details. 
+
 # Acknowledgments
 This tool either builds upon, is inspired by, or directly incorporates nearly ten years of prior research and development from the following awesome people:
 
