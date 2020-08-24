@@ -1,3 +1,4 @@
+wheel
 pycryptodome
 pkcs7
 jinja2
