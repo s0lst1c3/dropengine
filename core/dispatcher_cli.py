@@ -300,6 +300,12 @@ class Dispatcher:
                 self.dispatch['mutator'] = self.mutators[self.master_args.mutator]
                 unknown = self.mutators[self.master_args.mutator].parse_args(unknown)
                 self.options['mutator'] = self.mutators[self.master_args.mutator].get_options()
+            else:
+
+                print('[*] No mutator selected. Defauting to mutator_null.')
+                self.dispatch['mutator'] = self.mutators['mutator_null']
+                unknown = self.mutators['mutator_null'].parse_args(unknown)
+                self.options['mutator'] = self.mutators['mutator_null'].get_options()
 
             if self.master_args.runner is not None:
 

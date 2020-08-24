@@ -6,4 +6,4 @@ class DKey(OutputModule):
 
         super().__init__()
 
-        self.required_attrs(['compatible_ekeys'])
+        self.required_attrs(['compatible_imodules'])
