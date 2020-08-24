@@ -7,6 +7,7 @@ import sys
 from argparse import ArgumentParser
 from core.loader import Loader
 from core.helpers.error import pcompat, picompat, perror, pnoselect, pexit
+from core.helpers.banner import print_banner
 
 class Dispatcher:
 
@@ -479,8 +480,11 @@ class Dispatcher:
 
         else:
 
-            self.print_help()
+            print_banner()
             sys.exit()
+
+            
+
 
     def validate_build_args(self):
 
