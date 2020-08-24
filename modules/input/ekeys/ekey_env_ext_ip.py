@@ -18,11 +18,9 @@ class MEKey(EKey):
         self.mtype = 'ekey'
         self.author = '@s0lst1c3'
         self.description = 'Environmental key derived from external IP address'
-        self.compatible_omodule = [
-        ]
 
 
-        self.compatible_dkeys = [
+        self.compatible_omodules = [
 
             'dkey_env_csharp_ext_ip',
         ]

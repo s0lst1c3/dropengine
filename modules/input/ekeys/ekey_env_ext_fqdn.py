@@ -18,15 +18,12 @@ class MEKey(EKey):
         self.mtype = 'ekey'
         self.author = '@s0lst1c3'
         self.description = 'Environmental key derived from external FQDN'
-        self.compatible_omodule = [
-        ]
 
         self.compatible_interfaces = [
 
             'csharp_runner_interface',
         ]
-        self.compatible_dkeys = [
-
+        self.compatible_omodules = [
 
             'dkey_env_csharp_ext_fqdn',
         ]

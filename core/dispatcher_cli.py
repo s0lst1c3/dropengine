@@ -1,4 +1,4 @@
-
+import os
 import json
 import sys
 
@@ -6,6 +6,7 @@ import sys
 #from base64 import b64decode as b64
 from argparse import ArgumentParser
 from core.loader import Loader
+from core.helpers.error import pcompat, picompat, perror, pnoselect, pexit
 
 class Dispatcher:
 
@@ -192,8 +193,8 @@ class Dispatcher:
             print()
             print('    Listing compatible interfaces:')
             print()
-            for omodule in mod.compatible_interfaces:
-                print('        ', omodule)
+            for iface in mod.compatible_interfaces:
+                print('        ', iface)
                 print()
 
         print()
@@ -203,7 +204,7 @@ class Dispatcher:
         print()
         for mod in mods:
             if self.master_args.interface in mod.compatible_interfaces:
-                print('        ', mod)
+                print('        ', mod.name)
         print()
     
 
@@ -334,72 +335,67 @@ class Dispatcher:
                     print('Listing interfaces:')
                     print()
                     for _ in self.interfaces:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
 
                 if list_all or 'ekeys' in self.master_args.list:
                     print('Listing ekeys:')
                     print()
                     for _ in self.ekeys:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'dkeys' in self.master_args.list:
                     print('Listing dkeys:')
                     print()
                     for _ in self.dkeys:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'executors' in self.master_args.list:
                     print('Listing executors:')
                     print()
                     for _ in self.executors:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'crypters' in self.master_args.list:
                     print('Listing crypters:')
                     print()
                     for _ in self.crypters:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'decrypters' in self.master_args.list:
                     print('Listing decrypters:')
                     print()
                     for _ in self.decrypters:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'mutators' in self.master_args.list:
                     print('Listing mutators:')
                     print()
                     for _ in self.mutators:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'runners' in self.master_args.list:
                     print('Listing runners:')
                     print()
                     for _ in self.runners:
-                        print(f'    {_}')
-                    print()
-                if list_all or 'interfaces' in self.master_args.list:
-                    print('Listing interfaces:')
-                    print()
-                    for _ in self.interfaces:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'premodules' in self.master_args.list:
                     print('Listing premodles:')
                     print()
                     for _ in self.premodules:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 if list_all or 'postmodules' in self.master_args.list:
                     print('Listing postmodules:')
                     print()
                     for _ in self.postmodules:
-                        print(f'    {_}')
+                        print(f'    {_.name}')
                     print()
                 sys.exit()
 
-        elif self.at_least_one_module_type_is_selected(self.master_args):
+        #elif self.at_least_one_module_type_is_selected(self.master_args):
+        elif self.master_args.build:
 
             #if self.master_args.ekey is not None:
 
@@ -477,6 +473,66 @@ class Dispatcher:
                     unknown = self.dkeys[dkey].parse_args(unknown)
                     self.options['dkeys'].append(self.dkeys[dkey].get_options())
 
+            self.validate_build_args()
+            self.validate_module_compatibility()
+
+
+        else:
+
+            self.print_help()
+            sys.exit()
+
+    def validate_build_args(self):
+
+        interface = self.dispatch['interface']
+        runner = self.dispatch['runner']
+        crypter = self.dispatch['crypter']
+        decrypter = self.dispatch['decrypter']
+        ekeys = self.dispatch['ekeys']
+        dkeys = self.dispatch['dkeys']
+        executor = self.dispatch['executor']
+        postmodules = self.dispatch['postmodules']
+        premodules = self.dispatch['premodules']
+        mutator = self.dispatch['mutator']
+
+        shellcode = self.master_args.shellcode
+
+        if interface is None:
+            pnoselect('interface')
+
+        if runner is None:
+            pnoselect('runner')
+
+        if crypter is None:
+            pnoselect('crypter')
+
+        if decrypter is None:
+            pnoselect('decrypter')
+
+        if ekeys == []:
+            pnoselect('ekeys')
+
+        if dkeys == []:
+            pnoselect('dkeys')
+
+        if executor is None:
+            pnoselect('executor')
+
+        if mutator is None:
+            pnoselect('mutator')
+
+        if shellcode is None:
+            perror('No shellcode was provided to DropEngine.')
+            perror('You must specify the path to your shellcode using the --input-file flag.')
+            pexit('Aborting.')
+
+        if not os.path.exists(shellcode):
+            perror('The shellcode path you provided was invalid.')
+            perror('You must specify a valid path to your shellcode using the --input-file flag.')
+            pexit('Aborting.')
+
+            
+
     def print_args(self):
 
         print(json.dumps(self.options, indent=4, sort_keys=True))
@@ -485,6 +541,68 @@ class Dispatcher:
 
         print(self.dispatch)
 
+    def vmc_iface(self, mod, iface, mtype):
+
+        if iface.name not in mod.compatible_interfaces:
+            picompat(mod.name, iface.name, mtype)
+
+    def vmc_imodule(self, imodule, omodule, iface, mtype):
+    
+        if imodule.name not in omodule.compatible_imodules:
+            pcompat(imodule.name, omodule.name, mtype)
+
+        self.vmc_iface(imodule, iface, mtype)
+
+    def vmc_omodule(self, omodule, imodule, iface, mtype):
+    
+        if omodule.name not in imodule.compatible_omodules:
+            pcompat(omodule.name, imodule.name, mtype)
+
+        self.vmc_iface(omodule, iface, mtype)
+
+    def validate_module_compatibility(self):
+
+        #print(json.dumps(self.options, indent=4, sort_keys=True))
+
+        interface = self.dispatch['interface']
+        runner = self.dispatch['runner']
+        crypter = self.dispatch['crypter']
+        decrypter = self.dispatch['decrypter']
+        ekeys = self.dispatch['ekeys']
+        dkeys = self.dispatch['dkeys']
+        executor = self.dispatch['executor']
+        postmodules = self.dispatch['postmodules']
+        premodules = self.dispatch['premodules']
+
+        vmc_iface = self.vmc_iface
+        vmc_imodule = self.vmc_imodule
+        vmc_omodule = self.vmc_omodule
+
+        # validate crypter
+        vmc_imodule(crypter, decrypter, interface, 'crypter')
+
+        # validate decrypter
+        vmc_omodule(decrypter, crypter, interface, 'decrypter')
+
+        # validate ekeys and dkeys
+        for ekey,dkey in zip(ekeys, dkeys):
+            vmc_imodule(ekey, dkey, interface, 'ekeys')
+            vmc_omodule(dkey, ekey, interface, 'dkeys')
+
+        # validate executor
+        vmc_iface(executor, interface, 'executor')
+
+        # validate postmodules
+        for post in postmodules:
+            vmc_iface(post, interface, 'postmodules')
+
+        # validate premodules
+        for pre in premodules:
+            vmc_iface(pre, interface, 'premodules')
+
+        # validate runner 
+        vmc_iface(runner, interface, 'runner')
+        
     @staticmethod
     def add_hidden_help_method(parser):
 
@@ -519,6 +637,7 @@ class Dispatcher:
                                 type=str,
                                 required=False,
                                 default=None,
+                                choices=Dispatcher.get_choices('./modules/interfaces', 'MRunnerInterface'),
                                 help='Select interface')
         
         #modules_group.add_argument('--ekey',
@@ -655,16 +774,16 @@ class Dispatcher:
         modes_group.add_argument('--validate-modules', 
                             dest='validate_modules',
                             action='store_true',
-                            help='Build a payload')
+                            help='Validate the sanity of a custom module')
 
         build_group = parser.add_argument_group('Build')
 
-        build_group.add_argument('--shellcode',
+        build_group.add_argument('--input-file', '-i',
                                 dest='shellcode',
                                 type=str,
                                 required=False,
                                 default=None,
-                                help='Select shellcode')
+                                help='Specify path to input file containing shellcode')
 
 if __name__ == '__main__':
 
