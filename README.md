@@ -1,6 +1,10 @@
 ![DropEngine](https://raw.githubusercontent.com/s0lst1c3/dropengine/master/DropEngine%201.png)
 
-By [@s0lst1c3](https://twitter.com/s0lst1c3)
+by [@s0lst1c3](https://twitter.com/s0lst1c3)
+
+Current release: [v0.0.1-alpha](https://github.com/s0lst1c3/dropengine/releases/tag/v0.0.1-alpha)
+
+Supports _Python 3.7+_.
 
 # Overview
 

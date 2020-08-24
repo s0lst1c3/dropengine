@@ -7,7 +7,6 @@ if __name__ == '__main__':
     dispatcher = Dispatcher()
 
     dispatcher.parse_args()
-    dispatcher.validate_module_compatibility()
 
     if dispatcher.options['master']['debug']:
         dispatcher.print_args()
@@ -27,9 +26,3 @@ if __name__ == '__main__':
     else:
 
         print(payload)
-    
-
-    
-
-
-    
