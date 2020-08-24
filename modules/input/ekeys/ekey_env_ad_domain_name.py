@@ -19,15 +19,13 @@ class MEKey(EKey):
         self.mtype = 'ekey'
         self.author = '@s0lst1c3'
         self.description = 'Environmental key derived from AD domain name'
-        self.compatible_omodule = [
-        ]
 
         self.compatible_interfaces = [
 
             'csharp_runner_interface',
         ]
 
-        self.compatible_dkeys = [
+        self.compatible_omodules = [
             'dkey_csharp_env_ad_domain_name',
         ]
 
