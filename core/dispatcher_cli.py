@@ -782,7 +782,7 @@ class Dispatcher:
 
         build_group = parser.add_argument_group('Build')
 
-        build_group.add_argument('--input-file', '-i',
+        build_group.add_argument('--input-file', '-i', '--shellcode',
                                 dest='shellcode',
                                 type=str,
                                 required=False,
