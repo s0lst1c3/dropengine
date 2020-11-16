@@ -1,5 +1,5 @@
-__version__ = '0.1.1'
-__codename__ = 'lambsauce'
+__version__ = '0.1.0'
+__codename__ = 'Death will tremble to take us.'
 __author__ = '@s0lst1c3'
 __contact__ = 'gabriel<<<at>>solstice(dot))sh'
 __tagline__ = 'Malleable Payloads'
