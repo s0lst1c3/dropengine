@@ -7,8 +7,6 @@ from base.input.crypter.crypter import Crypter
 
 from Crypto.Cipher import AES
 
-# TODO: NEED TO FILL OUT DKEY FUNCTIONS / TEMPLATE RENDERING BECAUSE I FORGOT
-
 class MCrypter(Crypter):
 
     def __init__(self):

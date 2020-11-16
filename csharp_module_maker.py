@@ -145,14 +145,14 @@ def cli():
     template_vars_group.add_argument('--class-name',
                         dest='mclass_name',
                         type=str,
-                        required=True,
+                        required=False,
                         default=None,
                         help='Specify the class name of your template code.')
 
     template_vars_group.add_argument('--func-name',
                         dest='mfunc_name',
                         type=str,
-                        required=True,
+                        required=False,
                         default=None,
                         help='Specify the entrypoint function to your code.')
 
@@ -232,6 +232,23 @@ def cli():
                 print()
 
                 sys.exit(1)
+
+            if args.mclass_name is None:
+
+                print()
+                print(f'[!] The --class-name flag must be used with all output modules.')
+                print()
+
+                sys.exit(1)
+
+            if args.mfunc_name is None:
+
+                print()
+                print(f'[!] The --func-name flag must be used with all output modules.')
+                print()
+
+                sys.exit(1)
+
 
             if args.mtype == 'decrypter' and args.validate_compatibility:
 
@@ -364,26 +381,28 @@ def cli():
                 sys.exit(1)
 
     # ensure input files actually exist and are not directories
+
+    if args.mtype in OMODULE_TYPES:
     
-    if not os.path.exists(args.source_file):
+        if not os.path.exists(args.source_file):
 
-        print(f'[!] Error: source file {args.source_file} does not exist')
-        sys.exit(1)
+            print(f'[!] Error: source file {args.source_file} does not exist')
+            sys.exit(1)
 
-    if not os.path.isfile(args.source_file):
+        if not os.path.isfile(args.source_file):
 
-        print(f'[!] Error: source file {args.source_file} is a directory')
-        sys.exit(1)
+            print(f'[!] Error: source file {args.source_file} is a directory')
+            sys.exit(1)
 
-    if not os.path.exists(args.symbol_file):
+        if not os.path.exists(args.symbol_file):
 
-        print(f'[!] Error: symbol file {args.symbol_file} does not exist')
-        sys.exit(1)
+            print(f'[!] Error: symbol file {args.symbol_file} does not exist')
+            sys.exit(1)
 
-    if not os.path.isfile(args.symbol_file):
+        if not os.path.isfile(args.symbol_file):
 
-        print(f'[!] Error: symbol file {args.symbol_file} is a directory')
-        sys.exit(1)
+            print(f'[!] Error: symbol file {args.symbol_file} is a directory')
+            sys.exit(1)
 
     return args
 
@@ -562,6 +581,8 @@ def create(args):
         with open(output_py_template_path, 'w') as output_handle:
             output_handle.write(rendered_template+'\n')
 
+        print(f'[*] Saved new module to path: {output_py_template_path}') 
+
         if source_file is not None:
 
             with open(source_file) as input_handle:
@@ -578,6 +599,9 @@ def create(args):
             output_file = os.path.join('templates', output_cs_template_path)
             with open(output_file, 'w') as output_handle:
                 output_handle.write(raw_output)
+
+            print(f'[*] Saved new template to path: {output_file}') 
+
 
     else:
 
@@ -601,9 +625,12 @@ def create(args):
                                description=mdescription,
                                compatible_interfaces=compatible_interfaces,
                                compatible_xmodules=compatible_xmodules)
-
+    
         with open(output_py_template_path, 'w') as output_handle:
             output_handle.write(rendered_template+'\n')
+
+        print(f'[*] Saved new module to path: {output_py_template_path}') 
+
 
 def main():
 

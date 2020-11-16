@@ -2,12 +2,12 @@ import sys
 import argparse
 
 from antlr4 import *
-from CSharpLexer import CSharpLexer
-from CSharpParser import CSharpParser
-from CSharpParserListener import CSharpParserListener
+from module_maker.CSharpLexer import CSharpLexer
+from module_maker.CSharpParser import CSharpParser
+from module_maker.CSharpParserListener import CSharpParserListener
 
 
-from symbol_ini import SymbolINI
+from module_maker.symbol_ini import SymbolINI
 
 
 OMODULE_TYPES = [
