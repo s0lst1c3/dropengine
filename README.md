@@ -2,7 +2,7 @@
 
 by [@s0lst1c3](https://twitter.com/s0lst1c3)
 
-Current release: [v0.0.1-alpha](https://github.com/s0lst1c3/dropengine/releases/tag/v0.0.1-alpha)
+Current release: [v0.0.1-alpha](https://github.com/s0lst1c3/dropengine/releases/tag/v0.1.1-alpha)
 
 Supports _Python 3.7+_.
 

@@ -633,8 +633,6 @@ class Dispatcher:
                                 default=None,
                                 choices=Dispatcher.get_choices('./modules/input/crypters', 'MCrypter'),
                                 help='Select crypter')
-
-
         
         modules_group.add_argument('--interface',
                                 dest='interface',

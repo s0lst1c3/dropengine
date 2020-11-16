@@ -4,3 +4,4 @@ pkcs7
 jinja2
 termcolor
 Flask
+antlr4-python3-runtime
