@@ -10,7 +10,7 @@ Supports _Python 3.7+_.
 
 Defense Evasion techniques tend to have a short shelf-life, and this is especially true for techniques used during initial access. Because of this, initial access payloads are often prepared on a per-engagement  basis, which can be time-consuming when payloads are created entirely by hand. DropEngine addresses this problem by providing a malleable framework for creating shellcode runners, allowing operators to choose from a selection of components and combine them to create highly sophisticated payloads within seconds.
 
-Available payload components include crypters, execution and injection mechanisms, as well as environmental nad remote keying functions. Also included are pre-execution modules such as sandbox checks and AMSI bypasses. Although these pre-packaged example modules may prove useful, DropEngine's true strength is in its ability to improve operational efficiency by providing a high degree of payload standardization while simultaneously allowing operators to control just about every aspect of the payload's signature and behavior.
+Available payload components include crypters, execution and injection mechanisms, as well as environmental and remote keying functions. Also included are pre-execution modules such as sandbox checks and AMSI bypasses. Although these pre-packaged example modules may prove useful, DropEngine's true strength is in its ability to improve operational efficiency by providing a high degree of payload standardization while simultaneously allowing operators to control just about every aspect of the payload's signature and behavior.
 
 # Disclaimer
 
